@@ -52,7 +52,16 @@ def select_menu_item(choose_id):
         raise Exception('Exit')
 
 
+def is_authorization(email, password):
+    return email == 'admin@admin.com' and password == 'admin'
+
+
 def main():
+    email = input('email: ')
+    password = input('password: ')
+    if not is_authorization(email, password):
+        print('Error')
+        exit(0)
     while True:
         choose = input(MENU)
         if choose.isdigit() and int(choose) in [1, 2, 3]:
@@ -62,6 +71,7 @@ def main():
 
 
 if __name__ == '__main__':
+    print('Hello User!')
     db_name = 'data.json'
     tasks = load_from_db(db_name)
     try:
