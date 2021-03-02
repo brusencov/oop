@@ -68,6 +68,7 @@ def main():
 
 
 if __name__ == '__main__':
+    print('Hello User!')
     db_name = 'data.json'
     tasks = load_from_db(db_name)
     try:
