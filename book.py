@@ -11,6 +11,8 @@
 5) Удалять книги из файла
 6) Помечать как прочитанные книги
 7) Отображать книги из файла
+
+Документация по API Google books https://developers.google.com/books/docs/v1/reference/volumes
 """
 
 
