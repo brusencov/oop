@@ -1,3 +1,6 @@
+"""
+Master V1
+"""
 import json
 
 MENU = '1) Добавить\n' \
