@@ -29,7 +29,10 @@ def load_from_db(db_name):
 
 def add_item_to_db(item):
     global tasks
-    tasks.append(item)
+    if isinstance(item, str):
+        tasks.append(item)
+    else:
+        print('Item not a str')
 
 
 def get_items_from_db():
