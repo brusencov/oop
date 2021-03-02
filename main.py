@@ -49,7 +49,16 @@ def select_menu_item(choose_id):
         raise Exception('Exit')
 
 
+def is_authorization(email, password):
+    return email == 'admin@admin.com' and password == 'admin'
+
+
 def main():
+    email = input('email: ')
+    password = input('password: ')
+    if not is_authorization(email, password):
+        print('Error')
+        exit(0)
     while True:
         choose = input(MENU)
         if choose.isdigit() and int(choose) in [1, 2, 3]:
