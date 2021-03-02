@@ -15,7 +15,6 @@
 Документация по API Google books https://developers.google.com/books/docs/v1/reference/volumes
 """
 
-
 import requests
 import json
 
@@ -33,19 +32,26 @@ def get_google_books(search):
 def book_to_dict(book):
     base_book = {
         'author': '',
-        'title': book['volumeInfo']['title'],
+        'title': '',
         'description': '',
         'price': 0.0,
         'buy_link': None
     }
-    if book['saleInfo']['saleability'] != 'NOT_FOR_SALE':
-        base_book['buy_link'] = book['saleInfo']['buyLink']
-        base_book['price'] = book['saleInfo']['listPrice']['amount']
-        base_book['description'] = book['volumeInfo']['description']
-        base_book['author'] = book['volumeInfo']['authors']
+    if 'volumeInfo' in book:
+        if 'title' in book['volumeInfo']:
+            base_book['title'] = book['volumeInfo']['title']
+        if 'description' in book['volumeInfo']:
+            base_book['description'] = book['volumeInfo']['description']
+        if 'authors' in book['volumeInfo']:
+            base_book['author'] = book['volumeInfo']['authors']
+    if 'saleInfo' in book:
+        if 'buyLink' in book['saleInfo']:
+            base_book['buy_link'] = book['saleInfo']['buyLink']
+        if 'listPrice' in book['saleInfo'] and 'amount' in book['saleInfo']['listPrice']:
+            base_book['price'] = book['saleInfo']['listPrice']['amount']
     return base_book
 
 
 if __name__ == '__main__':
-    json_resp = get_google_books('Алиса')
+    json_resp = get_google_books('Мастер')
     books = [book_to_dict(x) for x in json_resp['items']]
